@@ -1,0 +1,33 @@
+section {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    padding-top:30px;
+}
+container {
+    display: flex;
+    justify-content: center;
+    border: 2px solid black;
+    margin:100px;
+    height: 600px;
+}
+div {
+    display: flex;
+    justify-content: space-around;
+    margin: 50px;
+    
+}
+#score {
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 60px;
+    
+}
+#timer {
+    border: 2px solid black;
+    text-align: center;
+    padding-top:60px;
+    border-radius: 20px;
+    width: 180px;
+}
+
