@@ -1,15 +1,21 @@
+* {
+    background-color:darkslategrey;
+    color: white;
+}
 section {
     display: flex;
     justify-content: space-around;
     text-align: center;
     padding-top:30px;
 }
-container {
-    display: flex;
-    justify-content: center;
-    border: 2px solid black;
+#quiz-box {
+    display: block;
+    border: 2px solid white;
     margin:100px;
     height: 600px;
+}
+#quiz-box h1 {
+    text-align: center;
 }
 div {
     display: flex;
@@ -18,16 +24,23 @@ div {
     
 }
 #score {
-    border: 2px solid black;
+    border: 2px solid white;
     border-radius: 20px;
     padding: 60px;
     
 }
 #timer {
-    border: 2px solid black;
+    border: 2px solid white;
     text-align: center;
     padding-top:60px;
     border-radius: 20px;
     width: 180px;
 }
 
+button {
+    display: block;
+}
+#answers :hover {
+    background-color: black;
+
+}

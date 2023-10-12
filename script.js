@@ -1,9 +1,15 @@
 const startbtn = document.getElementById("start");
 const quizquestions = document.getElementById("questions");
 var score = 0;
-var timeleft = 60;
+// var timeleft = 60;
 var QI = 0;
 var highScoreArr = JSON.parse(localStorage.getItem("highscores")) || [];
+const timerElement = document.getElementById('timer');
+const questionTimeInSeconds = 5;
+// let seconds = 30;
+let timerInterval;
+let addTimeInSeconds = 10;
+
 
 const questionArr = [
   {
@@ -22,7 +28,7 @@ const questionArr = [
     correctAnswer: "Math.floor(Math.random()*10)",
   },
   {
-    question: "3. What synbol is used to call a function after its name?",
+    question: "3. What symbol is used to call a function after its name?",
     answers: ["{}", "()", "//", "="],
     correctAnswer: "()",
   },
@@ -42,7 +48,7 @@ const questionArr = [
     correctAnswer: "Equal in type and value",
   },
   {
-    question: "6. What is the syntax for writing an if statement?",
+    question: "6. What is the syntax for writing an 'if' statement?",
     answers: [
       "if {condition} (execute code)",
       "if [condition] {execute code}",
@@ -112,33 +118,59 @@ startbtn.addEventListener("click", startQuiz);
 
 function startQuiz() {
   startbtn.style.display = 'none';
-  displayQuestion();
-  console.log(questionArr);
+  displayQuestion(questionTimeInSeconds);
+  startTimer(questionTimeInSeconds);
 }
-function displayQuestion() {
+
+
+
+function displayQuestion(remainingTime) {
   quizquestions.textContent = questionArr[QI].question;
   var buttonBox = document.getElementById("btn-box");
-  buttonBox.innerHTML = "";
+  buttonBox.innerHTML = '';
   questionArr[QI].answers.forEach((answer) => {
     var btn = document.createElement("button");
     btn.textContent = answer;
     btn.setAttribute("value", answer);
     btn.onclick = function () {
       if (this.value === questionArr[QI].correctAnswer) {
-        score++;
+        ++score;
+        ++QI;
+        remainingTime += addTimeInSeconds;
+        // startTimer(remainingTime);
+        console.log(remainingTime)
+        // timerElement.textContent = remainingTime;
       } else {
-        timeleft -= 10;
+        ++QI;
       }
-      QI++;
       if (QI === questionArr.length) {
         endGame();
       } else {
-        displayQuestion();
+        displayQuestion(remainingTime);
       }
     };
     buttonBox.appendChild(btn);
   });
 }
+function startTimer(seconds) {
+  let remainingTime = seconds;
+    timerElement.textContent = 'Time Remaining: ' + remainingTime + ' seconds';
+  
+    timerInterval = setInterval(() => {
+      remainingTime--;
+      timerElement.textContent = 'Time Remaining: ' + remainingTime + ' seconds';
+      
+  
+      if (remainingTime <= 0) {
+        ++QI;
+        clearInterval(timerInterval);
+        displayQuestion(remainingTime);
+        startTimer(questionTimeInSeconds);
+      }
+    }, 1000);
+  }
+      
+  
 function endGame() {
   document.getElementById("quiz-box").innerHTML = "";
   var myscore = 10;
@@ -154,4 +186,14 @@ highScoreArr.sort((a, b) => {
   return b.myscore - a.myscore;
 });
 
+// let remainingTime = questionTimeInSeconds;
+//     timerElement.textContent = `Time Remaining: ${remainingTime} seconds`;
+//     const timerInterval = setInterval (() => {
+//         remainingTime--;
+//         timerElement.textContent = 'Time Remaining: ' + remainingTime + ' seconds';
+//         if (remainingTime <= 0) {
+//             clearInterval(timerInterval);
+//             displayQuestion(QI + 1);
+//         }
+//     }, 1000);
 
