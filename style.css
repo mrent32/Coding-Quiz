@@ -44,3 +44,15 @@ button {
     background-color: black;
 
 }
+#initials {
+    padding: 30px;
+    text-align: center;
+    width: auto;
+    height:30px;
+}
+input {
+   margin: 30px;
+   background-color: white;
+   color:black;
+   border:
+}
