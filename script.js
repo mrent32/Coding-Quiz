@@ -177,7 +177,8 @@ function dislayScore() {
 function endGame() {
   clearInterval(timerInterval);
   document.getElementById("quiz-box", ).innerHTML = "";
-  console.log('input');
+  startbtn.style.display = 'block';
+  initials.style.display = 'block';
   var myscore = "";
   var initials = "";
   var initialsValue = initials.value;
